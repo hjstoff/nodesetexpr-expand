@@ -1,6 +1,6 @@
 # Nodeset expression language specification
 
-## Language alphabet
+## 1 LANGUAGE ALPHABET
 Formal languages are defined over a finite set of primitive tokens - literals -
 that constitute the "alphabet" of the language. The language of nodename
 expressions, defined here, is for concisely denoting a sets of nodenames.
@@ -24,7 +24,7 @@ This can lead to suprising or confusing outcomes. It makes it easier to use the
 utility wrongly. In the long run it also makes it more difficult to extend the
 language without breaking nodesets that used to be supported.
 
-## Considerations pertaining to supported nodenames
+## 1.1 Considerations pertaining to supported nodenames
 
 The language being defined understands nodenames to be DNS compatible names,
 or to be derived from such names. That is: nodenames optionally, but not
@@ -89,7 +89,7 @@ following as valid nodename characters:
 - The period (".") - but only to connect the different labels of a fully
   qualified domain name.
 
-### Nodenames (_not_ nodeset expressions) grammar
+### 1.1.1 Nodenames (_not_ nodeset expressions) grammar
 
 Since regular expression tend to get long, and most languages don't support
 building a large expression from named constants with sub-expressions, it
