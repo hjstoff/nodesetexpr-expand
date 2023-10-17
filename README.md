@@ -92,6 +92,12 @@ into a bit more generic and well-documented utility. Depending on the datasets -
 likely on the number and size of nodeset expressions they contained - the typical
 runtime of 12 to 15 minutes was reduced to 2.5 to 3.5 seconds!
 
+The approach taken is a bit of a formal one:
+- First, design the nodeset expression language as a formal language with
+  rstricted alphabet and a grammar,
+- Second, annotate the grammar with clear semantics - make the utility "hard to use wrongly".
+
+
 [^SLURM]: SchedMD, Slurm workload manager documentation,
 https://slurm.schedmd.com/documentation.html (last visited: 20231014).
 
