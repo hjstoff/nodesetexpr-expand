@@ -94,8 +94,20 @@ runtime of 12 to 15 minutes was reduced to 2.5 to 3.5 seconds!
 
 The approach taken is a bit of a formal one:
 - First, design the nodeset expression language as a formal language with
-  rstricted alphabet and a grammar,
-- Second, annotate the grammar with clear semantics - make the utility "hard to use wrongly".
+  restricted alphabet and a grammar,
+- Second, annotate the grammar with clear semantics - make the utility
+  "hard to use wrongly".
+
+My most important use case for a fast nodeset expand utility is the processing of
+downtime administration and accounting related datasets that contain nodeset
+expressions that are produced by Slurm commands. The syntax of that language is
+therefore very heavily influenced by how those expressions look - afterall, it must
+be compatible with them and interpret them in the way intended by the Slurm commands
+that output them - expand them to the same set of nodenames.
+
+Likewise, some extended features have been taken over from expressions that are
+understood by the clustershell ```nodeset --expand``` command, but then again some
+have not, for reasons pointed out in the language specification document.
 
 
 [^SLURM]: SchedMD, Slurm workload manager documentation,
