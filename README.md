@@ -1,5 +1,5 @@
 # nodesetexpr-expand
-Nodeset expressions are a concise way to denote a potentially large set of node\
+Nodeset expressions are a concise way to denote a potentially large set of node
 names that are systematically named using some numeric scheme. Nodeset
 expression expanding pertains to the parsing of such expressions, to produce
 the complete set of node names denoted by the expression.
@@ -84,15 +84,13 @@ contributing to its slowness is that what is loaded by the ```execve(2)```
 a python interpreter,which then subsequently loads a bunch of python modules
 before it eventually starts doing the work that it was called for.
 
-Writin 
-
-
-
-
-
-   
-12345678901234567890123456789012345678901234567890123456789012345678901234567890
-
+Writing a preliminary version of my own nodeset expression expander, implemented
+as a function in ```gawk(1)``` [^GAWK], that verifiably gave me the exact same
+outcomes on my datasets as the scripts using the clustershell nodeset utility made
+me decide that I should take this a bit further and develop this implementation
+into a bit more generic and well-documented utility. Depending on the datasets - most
+likely on the number and size of nodeset expressions they contained - the typical
+runtime of 12 to 15 minutes was reduced to 2.5 to 3.5 seconds!
 
 [^SLURM]: SchedMD, Slurm workload manager documentation,
 https://slurm.schedmd.com/documentation.html (last visited: 20231014).
@@ -114,11 +112,17 @@ https://slurm.schedmd.com/scontrol.html (last visited: 20231012)
 https://clustershell.readthedocs.io/en/latest/api/NodeSet.html
 (last visited: 20231012)
 
-[^FORK] Linux System Calls manual, "fork - create a child process",
+[^FORK]: Linux System Calls manual, "fork - create a child process",
 https://man7.org/linux/man-pages/man2/fork.2.html
+(last visited: 20231012)
 
-[^EXECVE] Linux System Calls manual, "execve - execute program",
+[^EXECVE]: Linux System Calls manual, "execve - execute program",
 https://man7.org/linux/man-pages/man2/execve.2.html
+(last visited: 20231012)
 
-[^EXECVE]
+[^GAWK]: GNU/Linux Utility commands , "gawk - pattern scanning and
+processing language", https://man7.org/linux/man-pages/man1/gawk.1.html
+(last visited: 20231002)
+
+
 
