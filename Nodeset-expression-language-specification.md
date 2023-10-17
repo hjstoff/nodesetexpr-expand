@@ -14,8 +14,12 @@ syntax of operators and other meta-characters, but they are surprisingly silent,
 up to the point of being rather sloppy, when it comes to valid characters
 for nodenames.
 
+[^SCONTROL]: SchedMD, Slurm workload manager, version 23.02 manual page,
+"scontrol - view or modify Slurm configuration and state"
+https://slurm.schedmd.com/scontrol.html (last visited: 20231012)
 
-[^SCONTROL]:
+[^NODESET]: Clustershell version 19.02 NodeSet Module documentation,
+https://clustershell.readthedocs.io/en/latest/api/NodeSet.html
+(last visited: 20231012)
 
-[^NODESET]:
 
