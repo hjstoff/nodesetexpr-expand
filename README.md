@@ -32,15 +32,52 @@ nodename expressions:
 - A nodeset expression like "room[1-3]-rack[1-10]-node[1-18]" denotes a set
   of 3 x 10 x 18  = 540 distinct nodenames
 
-## Exisiting utilities for handling nodeset expressions
+## Existing utilities for handling nodeset expressions
 There are at least two existing utilities for handling nodeset expressions that
-include the ability to expand such expressions in their handling repertoire.
+include the ability to expand such expressions in their handling repertoire:
 
-### scontrol show hostlist
-The Slurm ```scontrol``` [^SCONTROL] command has a ```show hostlist```
-sub-command that can expand an nodeset expression to a list of nodenames  
-### nodeset --expand 
+1. **Slurm's ```scontrol show hostlist``` command [^SCONTROL]**
+2. **The clustershell ```nodeset --expand``` command [^NODESET]**
 
+The behaviour of these commands, their restrictions and capabilities,are not
+exactly the same, but their functionality is overlapping.
+
+The first one is obviously only around on systems where Slurm is installed,
+which is a disadvantage when Slurm data on job accounting, on downtime
+statistics, etc. are processed are taken somwhere else to create reports.
+It also has the - documented - drawbacks.
+1. It does not have in a set-like way in that it does not deduplicate items.
+```
+$ scontrol show hostnames xx[1-4,3]
+xx1
+xx2
+xx3
+xx4
+xx3
+$ 
+```
+2. It cannot expand a nodeset expression if that expression does not end in
+an expandable part:
+```
+$ scontrol show hostnames r[1-2]n[1-2]
+r1n1
+r1n2
+r2n1
+r2n2
+$ scontrol show hostnames r[1-2]n[1-2]-bmc
+Invalid hostlist: r[1-2]n[1-2]-bmc
+$
+```
+The clustershell nodest utility is the more versatile command of the two. It has more
+capabilities with respect to nodeset handling then I need, but I have used its nodeset
+expanding capability quite a lot over the years. 
+ 
+
+
+
+
+
+   
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
 
 
@@ -59,5 +96,9 @@ https://slurm.schedmd.com/sacct.html (last visited: 20231012)
 [^SCONTROL]: SchedMD, Slurm workload manager, version 23.02 manual page,
 "scontrol - view or modify Slurm configuration and state"
 https://slurm.schedmd.com/scontrol.html (last visited: 20231012)
+
+[^NODESET]: Clustershell version 19.02 NodeSet Module documentation,
+https://clustershell.readthedocs.io/en/latest/api/NodeSet.html
+(last visited: 20231012)
 
 
