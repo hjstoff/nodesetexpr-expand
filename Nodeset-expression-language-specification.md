@@ -89,7 +89,7 @@ following as valid nodename characters:
 - The period (".") - but only to connect the different labels of a fully
   qualified domain name.
 
-### Nodemames (_not_ nodeset expressions) grammar
+### Nodenames (_not_ nodeset expressions) grammar
 
 Since regular expression tend to get long, and most languages don't support
 building a large expression from named constants with sub-expressions, it
@@ -126,7 +126,29 @@ regex: [0-9]
 
 regex: [a-z]
 ```
+To test, in a case insensitive manner, for a valid short nodename or nodename
+with a domain suffix, using (g)awk:
 
+```gawk
+#! /usr/bin/gawk -bf
+BEGIN {
+        printf(" >>> ");
+}
+
+function is_validnodename(s) {
+        return match(s, /^[a-z0-9_-]+([.][a-z0-9_-]+)*$/);
+}
+
+{
+        print is_validnodename($1) ? "VALID!" : "INVALID";
+        printf(" >>> ");
+} 
+
+function is_validnodename(s) {
+
+}
+
+```
 [^SCONTROL]: SchedMD, Slurm workload manager, version 23.02 manual page,
 "scontrol - view or modify Slurm configuration and state",
 https://slurm.schedmd.com/scontrol.html (last visited: 20231012)
