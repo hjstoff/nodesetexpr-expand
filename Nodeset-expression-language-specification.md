@@ -131,24 +131,15 @@ with a domain suffix, using (g)awk:
 
 ```gawk
 #! /usr/bin/gawk -bf
-BEGIN {
-        printf(" >>> ");
-}
 
 function is_validnodename(s) {
         return match(s, /^[a-z0-9_-]+([.][a-z0-9_-]+)*$/);
 }
 
-{
-        print is_validnodename($1) ? "VALID!" : "INVALID";
-        printf(" >>> ");
-} 
-
-function is_validnodename(s) {
-
-}
-
+BEGIN { printf(" >>> "); }
+{ print is_validnodename($1) ? "VALID!" : "INVALID"; printf(" >>> "); } 
 ```
+
 [^SCONTROL]: SchedMD, Slurm workload manager, version 23.02 manual page,
 "scontrol - view or modify Slurm configuration and state",
 https://slurm.schedmd.com/scontrol.html (last visited: 20231012)
