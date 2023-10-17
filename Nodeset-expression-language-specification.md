@@ -96,8 +96,11 @@ building a large expression from named constants with sub-expressions, it
 may be helpful to define a grammar in BNF form, with corresponding regular
 (sub-)expressions as annotation.
 
-N.B.: The grammar, nor the regular expressions take length limits, such as the
-DNS requirement that a label is not longer than 63 bytes, into account.
+N.B.: The grammar does not take length limits, such as the DNS requirement
+that a label is not longer than 63 bytes, into account. The regular expressions
+can do this up to some point, but taking length limits into account at a "higher
+level of  aggregation", such as the complete nodename, which may can have any
+multiple label each of different actual lengths, is not feasible.
 
 ```BNF
 <nodename>              ::= <label> | <label> <domain_suffix>
