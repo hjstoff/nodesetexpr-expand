@@ -133,12 +133,24 @@ with a domain suffix, using (g)awk:
 #! /usr/bin/gawk -bf
 
 function is_validnodename(s) {
-        return match(s, /^[a-z0-9_-]+([.][a-z0-9_-]+)*$/);
+        return match(tolower(s), /^[a-z0-9_-]+([.][a-z0-9_-]+)*$/);
 }
 
 BEGIN { printf(" >>> "); }
 { print is_validnodename($1) ? "VALID!" : "INVALID"; printf(" >>> "); } 
 ```
+## 1.2 Considerations pertaining to the meta-characters
+Meta-characters used by the langue are:
+- left and right square brackets ("[" and "]"), to demarcate an expandable
+  numberstringset sub-expression
+- the comma ",", both as the union operator to join simple nodeset
+  expressions into a single compound expression, and a separator for the
+  items of numberstringset items.
+- the forward slash ("/") to introduce an option stride count for
+  numberstringset items that are ranges. Note that in (g)awk regular expression
+  constants this character has to be escaped, because regular expression
+  constants are themselves enclosed in a pair of forward slashes.
+- the plus ("+") as an - optional - sign for a positive stride count
 
 [^SCONTROL]: SchedMD, Slurm workload manager, version 23.02 manual page,
 "scontrol - view or modify Slurm configuration and state",
