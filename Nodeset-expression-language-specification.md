@@ -67,6 +67,18 @@ The uneasiness comes from the fact that, while the convention is to represent
 them using lowercase letters only, DNS protocols are required to treat
 hostnames as case insensitive [^RFC1034], [^RFC4343].
 
+The choice made here is to follow DNS in the following way: the alphabet of
+the language does not contain any uppercase letters. A string supposed to
+contain a nodeset expression is _forced to lowercase, before it is parsed_.
+This has the effect of making the addition of strings like "NODE1", "node1",
+"Node1", "noDe1", etc., idempotent.
+
+Sites may however have reasons to their Slurm nodes using name schemes in
+which character casing _does_ matter for denoting distinct nodes.  If the case
+insensitivity as described is _not_ desired, it is fairly easy to change in an
+implementation that uses regular expression constants, by extending
+```[a-z0-9_-]``` to ```[A-Za-z]0-9]_-```.
+
 
 [^SCONTROL]: SchedMD, Slurm workload manager, version 23.02 manual page,
 "scontrol - view or modify Slurm configuration and state",
