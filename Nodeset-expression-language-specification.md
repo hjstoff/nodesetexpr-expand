@@ -1,6 +1,7 @@
 # Nodeset expression language specification
 
-Formal anguages are defined over a finite set of primitive tokens - literals -
+## Language alphabet
+Formal languages are defined over a finite set of primitive tokens - literals -
 that constitute the "alphabet" of the language. The language of nodename
 expressions, defined here, is for concisely denoting a sets of nodenames.
 Therefore, its alphabet must contain all characters that are valid nodename
@@ -13,6 +14,21 @@ Existing nodeset expression expanding tools - Slurm's ```scontrol command```
 syntax of operators and other meta-characters, but they are surprisingly silent,
 up to the point of being rather sloppy, when it comes to valid characters
 for nodenames.
+
+After some experimenting its seems that likely that the approach has been:
+- meta-characters cannot be escaped, therefore meta-characters cannot possibly
+  occur as literal primitives in nodenames;
+- every possible character that is not a meta-character is acceptable as nodename
+  character.
+This can lead to suprising or confusing outcomes. It makes it easier to use the
+utility wrongly. In the long run it also makes it more difficult to extend the
+language without breaking nodesets that used to be supported.
+
+ 
+
+
+
+
 
 [^SCONTROL]: SchedMD, Slurm workload manager, version 23.02 manual page,
 "scontrol - view or modify Slurm configuration and state"
