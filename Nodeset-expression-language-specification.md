@@ -79,6 +79,20 @@ insensitivity as described is _not_ desired, it is fairly easy to change in an
 implementation that uses regular expression constants, by extending
 ```[a-z0-9_-]``` to ```[A-Za-z]0-9]_-```.
 
+To summarize: the language of nodeset expressions specified here, recognizes the
+following as valid nodename characters:
+
+- The 26 letters of the roman alphabet in lowercase
+- The 10 decimal digits
+- The hyphen ("-")
+- The underscore ("_")
+- The period (".") - but only to connect the different labels of a fully
+  qualified domain name.
+
+### Nodemames (_not_ nodeset xpressions) grammar
+As regular expressions tend to get long and hard to read it may be helpful to
+present them in sub-expressions for smaller parts as annotation to a grammar
+in BNF form.
 
 [^SCONTROL]: SchedMD, Slurm workload manager, version 23.02 manual page,
 "scontrol - view or modify Slurm configuration and state",
