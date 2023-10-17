@@ -89,10 +89,40 @@ following as valid nodename characters:
 - The period (".") - but only to connect the different labels of a fully
   qualified domain name.
 
-### Nodemames (_not_ nodeset xpressions) grammar
-As regular expressions tend to get long and hard to read it may be helpful to
-present them in sub-expressions for smaller parts as annotation to a grammar
-in BNF form.
+### Nodemames (_not_ nodeset expressions) grammar
+
+Since regular expression tend to get long, and most languages don't support
+building a large expression from named constants with sub-expressions, it
+may be helpful to define a grammar in BNF form, with corresponding regular
+(sub-)expressions as annotation.
+
+N.B.: The grammar, nor the regular expressions take length limits, such as the
+DNS requirement that a label is not longer than 63 bytes, into account.
+
+```BNF
+<nodename>              ::= <label> | <label> <domain_suffix>
+regex: [a-z0-9_-]+([.][a-z0-9]_-]+)*
+
+<domain_suffix>         ::= [.] <label> |  [.] <label> <domain_suffix>
+regex: ([.][a-z0-9_-]+)+
+
+<label>                 ::= <nodename_char> | <nodename_char> <label>
+regex: [a-z0-9_-]+
+
+<nodename_char>         ::= <lowercase_letter> | <decimal_digit> | "_" | "-"
+regex: [a-z0-9_-]
+
+<decimal_digit>         ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" |
+                            "8" | "9"
+regex: [0-9]
+
+<lowercase_letter>      ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" |
+                            "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" |
+                            "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" |
+                            "y" | "z"
+
+regex: [a-z]
+```
 
 [^SCONTROL]: SchedMD, Slurm workload manager, version 23.02 manual page,
 "scontrol - view or modify Slurm configuration and state",
