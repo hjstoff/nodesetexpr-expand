@@ -143,7 +143,7 @@ BEGIN { printf(" >>> "); }
 Meta-characters used by the langue are:
 - left and right square brackets ("[" and "]"), to demarcate an expandable
   numberstringset sub-expression
-- the comma ",", both as the union operator to join simple nodeset
+- the comma (","), both as the union operator to join simple nodeset
   expressions into a single compound expression, and a separator for the
   items of numberstringset items.
 - the forward slash ("/") to introduce an option stride count for
