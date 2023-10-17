@@ -32,7 +32,7 @@ nodename expressions:
 - A nodeset expression like "room[1-3]-rack[1-10]-node[1-18]" denotes a set
   of 3 x 10 x 18  = 540 distinct nodenames
 
-## Existing utilities for handling nodeset expressions
+## Existing utilities handling nodeset expressions and the rationale for creating another one
 There are at least two existing utilities for handling nodeset expressions that
 include the ability to expand such expressions in their handling repertoire:
 
@@ -68,10 +68,23 @@ $ scontrol show hostnames r[1-2]n[1-2]-bmc
 Invalid hostlist: r[1-2]n[1-2]-bmc
 $
 ```
-The clustershell nodest utility is the more versatile command of the two. It has more
-capabilities with respect to nodeset handling then I need, but I have used its nodeset
-expanding capability quite a lot over the years. 
- 
+The clustershell nodest utility is the more versatile command of the two. It has
+more capabilities with respect to nodeset handling then I will ever need, but I
+have productively used its nodeset expanding capability quite a lot over the years. 
+Using it as utility on a massive scale, in scripts analyzing and reporting on
+datasets that contained lots of nodeset expressions to expanded, it became
+irritatingly obvious that the programs runtime performance left very much to
+be desired. With large datasets, I found that _at least_ 90% of the runtime spent
+was due to using the ```nodeset``` utility for nodeset expression expansion!
+
+Part of its slowness comes from the fact that using it as a standalone utility
+in a script that is not implemented in ```python3``` implies a ```fork(2)```
+[^FORK] and ```execve(2)``` [^EXECVE] system call for every invocation. Further
+contributing to its slowness is that what is loaded by the ```execve(2)```
+a python interpreter,which then subsequently loads a bunch of python modules
+before it eventually starts doing the work that it was called for.
+
+Writin 
 
 
 
@@ -101,4 +114,11 @@ https://slurm.schedmd.com/scontrol.html (last visited: 20231012)
 https://clustershell.readthedocs.io/en/latest/api/NodeSet.html
 (last visited: 20231012)
 
+[^FORK] Linux System Calls manual, "fork - create a child process",
+https://man7.org/linux/man-pages/man2/fork.2.html
+
+[^EXECVE] Linux System Calls manual, "execve - execute program",
+https://man7.org/linux/man-pages/man2/execve.2.html
+
+[^EXECVE]
 
