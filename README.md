@@ -3,17 +3,20 @@
 ## What this project is about
 Nodeset expressions are character strings over a well-defined alphabet of character
 literals that constitute a (potentially) concise way to denote a potentially large
-but finite _set_ of nodenames.
+but finite _set_ of nodenames. Nodenames in this context are names of computer
+systems, such as the nodes of a cluster of compute nodes for high performance
+computing and/or capacity computing.
 
 The focus of this project is on (a) language(s) for nodeset expressions and on
 developing and maintaining (a) tool(s) for producing, from such expressions, the
 explicit enumeration of all set members. More specifically, nodeset expression
 _expanding_ pertains to the parsing of nodeset expressions, and to the subsequent
-production of each of the nodenames denoted by an expression, as a set of distinct
+production of each of the nodenames denoted by such expressions, as sets of distinct
 individual character strings - viz. one for each set member - to be stored in some
-appropriate "container type" that, at least during production, guartantees
-uniqueness of each element.
+appropriate "container type" that, at least during production, guartantees the
+uniqueness of each of its elements.
 
+# A nodeset expression language has an alphabet and a grammar
 A nodeset expression _language_ is simply the language in which nodeset expressions
 are formulated. But a nodeset expression language is a _formal_ language: it has
 - a well-defined alphabet, i.e: a finite set of literal characters that can be used by
@@ -30,18 +33,26 @@ It also implies that a sequence of alphabetical characters of _L_, that cannot p
 be produced by following the syntax rules of _L_, are not part of the language, and hence
 are noit nodeset expressions at all.
 
-If the nodeset expression language is to have any practical purpose, most, and preferably
-all of the language constructs that can be produced by it, also have a well-defined
+If the nodeset expression language is to have any practical purpose, it has to be
+meaningful is some sense:  most, and preferably all, of the language  constructs that
+can be produced by appying its , also have a well-defined
 meaning. Unfortunately, that what is denoted by the expressions of a language, the
-semantics of its constructs, are something that it is much more difficult to be precise
+semantics of its constructs, is something that it is much more difficult to be precise
 or non-ambiguous about than its syntax, even for formal languages.
 
-One form - perhaps the most basic and explicit form - of a nodeset expression that
+Since a nodeset expression languages is for denoting sets of nodenames, its alphabet
+and grammar, must be closely related to the language for expressing nodenames, but it
+is definitely not the same language.
+
+One form - perhaps the most basic and explicit form - of a nodeset expression, that
 a nodeset expression language should support, is a sequence of one or more literal
 nodenames, where the individual nodenames are separated from each other by a
-well-defined token that cannot be part of any nodename. Nodeset expressions denote
-_sets_.  For the semantics of the this basic form this implies that multiple
-occurrences of the same name in the sequence are valid perfectly valid, but _idempotent_.
+well-defined token that cannot be part of any nodename.
+Nodeset expressions denote _sets_. For the semantics of the this basic form purpose
+implies, or requires, that multiple occurrences of the same name in the sequence are
+valid perfectly valid, but are _idempotent_.
+
+I
 
 This however, is obviously not the most concise form. Nodeset expressions
 get their conciseness, and thereby their usefulness, from also using language
