@@ -1,6 +1,6 @@
 # nodesetexpr-expand
 
-# Demarcation of nodeset expressions and nodeset expression languages
+## Demarcation of nodeset expressions and nodeset expression languages
 Nodeset expressions are character strings over an well-defined alphabet of character
 literals that constitute a (potentially) - concise way to denote ac potentially large
 but finite, _set_ of nodenames.
