@@ -16,6 +16,24 @@ individual character strings - viz. one for each set member - to be stored in so
 appropriate "container type" that, at least during production, guartantees the
 uniqueness of each of its elements.
 
+## Scope limitations and design guidance
+The inverse operation of nodeset expression expanding is _compressing_ or _folding_
+a list of nodenames into a nodeset expression. Such inverse operation are not in
+scope of this project. In particular, whether they would be easier or more difficult
+to implement is not having any bearing on decisions in this project pertaining to
+the nodeset expression language or its semantics.
+
+Nodeset expressions and tools that produce them already exist for quite some time.
+Though not the only use case, by far the most important use case for any tooling
+delivered by this project is the handling of nodeset expressions that are produced
+by the utilties of the Slurm [^SLURM] workload manager system. Design is guided
+by the requirement that the nodeset expressions produced by Slurm tools must all
+be recognized as valid language, and furthermore, that they have the same
+meaning - expand to the same enumeration of literal nodenames - as intended to
+be denoted by the Slurm tooling, provided the Slurm instance that has all of
+its nodenames configured in a way that is fully compliant with the requirements for
+hostnames for the Domain Name System (DNS).
+
 # A nodeset expression language has an alphabet and a grammar
 A nodeset expression _language_ is simply the language in which nodeset expressions
 are formulated. But a nodeset expression language is a _formal_ language: it has
