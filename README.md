@@ -1,39 +1,42 @@
 # nodesetexpr-expand
 
 ## What this project is about
-Nodeset expressions are strings, of a formal language defined over some
-well-defined alphabet of character literals, that constitute a (potentially)
+Nodeset expressions are strings, in a formal language, defined over some
+finite alphabet of character literals, that constitute a (potentially)
 concise way to denote a potentially large but finite _set_ of nodenames.
 
-Nodenames in this context are names of computer systems, such as the nodes of a
-cluster of compute nodes for high performance computing and/or capacity computing.
+Nodenames in this context are names of computer systems, such as the nodes of
+a cluster of compute nodes for high performance computing and/or capacity
+computing.
 
 The focus of this project is on (a) language(s) for nodeset expressions and on
-developing and maintaining (a) tool(s) for producing, from such expressions, the
+developing and maintaining tooling for producing, from such expressions, the
 explicit enumeration of all set members. More specifically, nodeset expression
 _expanding_ pertains to the parsing of nodeset expressions, and to the subsequent
-production of each of the nodenames denoted by such expressions, as sets of distinct
-individual character strings - viz. one for each set member - to be stored in some
-appropriate "container type" that, at least during production, guartantees the
-uniqueness of each of its elements.
+production of each of the nodenames denoted by such expressions, as sets of
+individual character strings - viz. a unique distinct one  for each set member -
+to be stored in some appropriate "container type" that, at least during production,
+guartantees the uniqueness of each of its elements.
 
 ## Scope limitations and design guidance
-The inverse operation of nodeset expression expanding is _compressing_ or _folding_
-a list of nodenames into a nodeset expression. Such inverse operation are not in
-scope of this project. In particular, whether they would be easier or more difficult
-to implement is not having any bearing on decisions in this project pertaining to
-the nodeset expression language or its semantics.
+The inverse operation of nodeset expression expanding is _compressing_, or
+_folding_ a list of nodenames into a nodeset expression. Such inverse operations
+are not in scope of this project. In particular, whether they would be easier or
+more difficult to implement, is not having any bearing on decisions in this project
+pertaining to the nodeset expression language or its semantics.
 
-Nodeset expressions and tools that produce them already exist for quite some time.
+Nodeset expressions, and tools that produce them, already exist for quite some time.
 Though not the only use case, by far the most important use case for any tooling
 delivered by this project is the handling of nodeset expressions that are produced
-by the utilties of the Slurm [^SLURM] workload manager system. Design is guided
-by the requirement that the nodeset expressions produced by Slurm tools must all
-be recognized as valid language, and furthermore, that they have the same
-meaning - expand to the same enumeration of literal nodenames - as intended to
-be denoted by the Slurm tooling, provided the Slurm instance that has all of
-its nodenames configured in a way that is compliant with the requirements for
-hostnames for the Domain Name System (DNS) [^DNS].
+by the utilties of the Slurm workload manager system [^SLURM]. Design is guided by the
+requirement that the nodeset expressions produced by Slurm tools must be recognized as
+valid language in terms of the language(s) described here, and by the tooling stemming
+from this project, on the prerequisite that the Slurm instance that has all of its
+nodenames configured in a way that is compliant with the requirements for hostnames of
+the Domain Name System (DNS) [^DNS]. Apart from being recognized as valid nodeset
+expression they also must have the same meaning - that is: expand to the an enumeration
+of literal nodenames that is equivalent to the enumeration of nodenames intended to be
+denoted by Slurm tooling that created the nodeset expression.
 
 # A nodeset expression language has an alphabet and a grammar
 A nodeset expression _language_ is simply the language in which nodeset expressions
