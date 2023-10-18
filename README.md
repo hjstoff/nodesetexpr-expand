@@ -227,12 +227,13 @@ https://www.rfc-editor.org/rfc/rfc1034.txt (last visited: 20231014)
 RFC 1123, October 1989.
 https://www.rfc-editor.org/rfc/rfc1123.txt (last visited: 20231014)
 
-[^RFC1178]:
+[^RFC1178]: Libes, D., "Choosing a Name for Your Computer",
+RFC 1178, August 1990.
+https://www.rfc-editor.org/rfc/rfc1178.txt (last visited: 20231014)
 
 [^RFC4343]: Eastlake, D. "Domain Name System (DNS) Case Insensitivity
 Clarification", RFC 4343, January 2006.
 https://www.rfc-editor.org/rfc/rfc4343.txt (last visited: 202310140
-
  
 
 [^SINFO]: SchedMD, Slurm workload manager, version 23.02 manual page,
