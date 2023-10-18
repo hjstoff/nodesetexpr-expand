@@ -21,9 +21,10 @@ guartantees the uniqueness of each of its elements.
 ## Scope limitations and use case derived design guidance
 The inverse operation of nodeset expression expanding is _compressing_, or
 _folding_ a list of nodenames into a nodeset expression. Such inverse operations
-are not in scope of this project. In particular, whether they would be easier or
-more difficult to implement, is not having any bearing on decisions in this project
-pertaining to the nodeset expression language or its semantics.
+are not in scope of this project. In particular, whether optimised compressing,
+finding the most succint nodeset expression, would be easier or more difficult
+to implement, in this project is not having any bearing on the outcome of
+decisions pertaining to the nodeset expression language's syntax or its semantics.
 
 Nodeset expressions, and tools that produce them, already exist for quite some time.
 Though not the only use case, by far the most important use case, from my perspective,
@@ -40,29 +41,32 @@ must expand to an enumeration of literal nodenames that is equivalent to the enu
 of nodenames intended to be denoted by the Slurm tooling that created the nodeset
 expression.
 
-# A nodeset expression language has an alphabet and a grammar
+## Defining ingredients of a nodeset expression language: alphabet and grammar
 A nodeset expression _language_ is simply the language in which nodeset expressions
-are formulated. But a nodeset expression language is a _formal_ language: it has
+are formulated.
+
+But a nodeset expression language is a _formal_ language. It has:
 - a well-defined alphabet, i.e: a finite set of literal characters that can be used by
   expressions that belong to the language
 - a well-defined syntax, or grammar, i.e: a set of rules that defines how sequences of
   characters that are part of the alphabet can be combined to form valid language
   constructs.
 
-The above implies that character strings that contain a character that does not belong
-to the alphabet of a nodeset expression language _L_ by definition are _not_ part of
+The above implies that character strings, that contain a character that does not belong
+to the alphabet of a nodeset expression language _L_, by definition are _not_ part of
 the language, and hence are not nodeset expressions at all.
 
 It also implies that a sequence of alphabetical characters of _L_, that cannot possibly
 be produced by following the syntax rules of _L_, are not part of the language, and hence
-are noit nodeset expressions at all.
+are not nodeset expressions at all.
 
+## Nodeset expression language semantics
 If the nodeset expression language is to have any practical purpose, it has to be
-meaningful is some sense:  most, and preferably all, of the language  constructs that
-can be produced by appying its , also have a well-defined
-meaning. Unfortunately, that what is denoted by the expressions of a language, the
-semantics of its constructs, is something that it is much more difficult to be precise
-or non-ambiguous about than its syntax, even for formal languages.
+meaningful is some sense: most, and preferably all, of the language constructs that
+can be produced by appying its rules, also have a well-defined meaning. Unfortunately,
+that what is denoted by the expressions of a language, the semantics of its constructs,
+is something that it is much more difficult to be precise or non-ambiguous about than its
+syntax, even for formal languages. 
 
 Since a nodeset expression languages is for denoting sets of nodenames, its alphabet
 and grammar, must be closely related to the language for expressing nodenames, but it
@@ -207,17 +211,29 @@ have not, for reasons pointed out in the language specification document.
 [^SLURM]: SchedMD, Slurm workload manager documentation,
 https://slurm.schedmd.com/documentation.html (last visited: 20231014).
 
+[^DNS]: There are several relevant so-called "Request for Comment" documents
+(RFCs). The oldest one is probably RFC 952 [^RFC952]. Other relevant RFCs are
+RFC 1034 [^RFC1034], RFC 1123 [^RFC1123], RFC 1178 [^RFC1178], and RFC 4343
+[^RFC4343]. There are some small changes over time, not so much with respect
+to the characters that can be used, but more to restriction on which characters
+can be the first character of a hostname. 
 
 
 [^RFC1034]: Mockapetris, P., "Domain Names - Concepts and Facilities", STD 13,
 RFC 1034, November 1987.
 https://www.rfc-editor.org/rfc/rfc1034.txt (last visited: 20231014)
 
+[^RFC1123]: Braden, R., "Requirements for Internet Hosts -- Application and Support",
+RFC 1123, October 1989.
+https://www.rfc-editor.org/rfc/rfc1123.txt (last visited: 20231014)
+
+[^RFC1178]:
+
 [^RFC4343]: Eastlake, D. "Domain Name System (DNS) Case Insensitivity
 Clarification", RFC 4343, January 2006.
 https://www.rfc-editor.org/rfc/rfc4343.txt (last visited: 202310140
 
-
+ 
 
 [^SINFO]: SchedMD, Slurm workload manager, version 23.02 manual page,
 "sinfo - view information about Slurm nodes and partitions",
