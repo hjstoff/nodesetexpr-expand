@@ -1,13 +1,59 @@
 # nodesetexpr-expand
-Nodeset expressions are a concise way to denote a potentially large set of node
-names that are systematically named using some numeric scheme. Nodeset
-expression expanding pertains to the parsing of such expressions, to produce
-the complete set of node names denoted by the expression.
+
+# Demarcation of nodeset expressions and nodeset expression languages
+Nodeset expressions are character strings over an well-defined alphabet of character
+literals that constitute a (potentially) - concise way to denote ac potentially large
+but finite, _set_ of nodenames.
+
+A nodeset expression _language_ is simply the language in which nodeset expressions
+are formulated. But a nodeset expression language is a _formal_ language: it has
+- an alphabet, a finite set of literal characters
+- a well-defined syntax, or grammar, that is: a set of rules that defines how
+  sequences of characters that are part of the alphabet can be combined into sequences
+  that are valid language constructs.
+
+Character strings that contain a character that does not belong to the alphabet of
+a language _L_ by definition are not part of the language, and neither is any
+sequence of alphabetical characters of _L_ that cannot possibly be produced by following
+the syntax rules of _L_.
+
+If the nodeset expression language is to have any practical purpose, most, and preferably
+all of the language constructs that can be produced by it, also have a well-defined
+meaning. Unfortunately, that what is denoted by the expressions of a language, the
+semantics of its constructs, are something that it is much more difficult to be precise
+or non-ambiguous about than its syntax, even for formal languages.
+
+One form - perhaps the most basic and explicit form - of a nodeset expression that
+a nodeset expression language should support, is a sequence of one or more literal
+nodenames, where the individual nodenames are separated from each other by a
+well-defined token that cannot be part of any nodename. Nodeset expressions denote
+_sets_.  For the semantics of the this basic form this implies that multiple
+occurrences of the same name in the sequence are valid perfectly valid, but _idempotent_.
+
+This however, is obviously not the most concise form. Nodeset expressions
+get their conciseness, and thereby their usefulness, from also using language
+constructs that presuppose that the nodenames to be denoted were created by
+systematically applying some numbering scheme. The most obvious language construct
+that results in conciseness, is one that enables the expression of numeric ranges,
+used in naming nodes, by merely naming their bounds.
+
+Nodeset expression expanding pertains to the parsing of such expressions, and to
+the subsequent production of the of each of the node names denoted by the expression,
+as a set of distinct individual character strings, to be stored in some appropriate
+"container type" that, at least during production, guartantees, deduplicates of
+multiple additions of the same string, so as to preserve the concept that the
+nodeset expression that was expanded denoted a _set_, rather than a list,
+of names.
+
+The focus of this project is on (a) language(s) for nodeset expressions and on
+developing and maintaining (a) tool(s) for expanding such expressions into the
+explicit enumeration of all set members.
+
 
 Nodeset expressions occur in line records output by commands of the Slurm
 [^SLURM] workload manager system, like ```sinfo``` [^SINFO] or ```sacct```
 [^SACCT], to indicate which nodes are in a particular state, members of a
-particular partition, or to indicate on which set of nodes a  job ran.
+particular partition, or to indicate on which set of nodes a job ran.
 
 ## Some examples of nodeset expressions
 Nodenames are strings. To clarify what is meant by systematically naming
