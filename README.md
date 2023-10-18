@@ -18,7 +18,7 @@ individual character strings - viz. a unique distinct one  for each set member -
 to be stored in some appropriate "container type" that, at least during production,
 guartantees the uniqueness of each of its elements.
 
-## Scope limitations and design guidance
+## Scope limitations and use case derived design guidance
 The inverse operation of nodeset expression expanding is _compressing_, or
 _folding_ a list of nodenames into a nodeset expression. Such inverse operations
 are not in scope of this project. In particular, whether they would be easier or
@@ -26,17 +26,19 @@ more difficult to implement, is not having any bearing on decisions in this proj
 pertaining to the nodeset expression language or its semantics.
 
 Nodeset expressions, and tools that produce them, already exist for quite some time.
-Though not the only use case, by far the most important use case for any tooling
-delivered by this project is the handling of nodeset expressions that are produced
-by the utilties of the Slurm workload manager system [^SLURM]. Design is guided by the
-requirement that the nodeset expressions produced by Slurm tools must be recognized as
-valid language in terms of the language(s) described here, and by the tooling stemming
-from this project, on the prerequisite that the Slurm instance that has all of its
-nodenames configured in a way that is compliant with the requirements for hostnames of
-the Domain Name System (DNS) [^DNS]. Apart from being recognized as valid nodeset
-expression they also must have the same meaning - that is: expand to the an enumeration
-of literal nodenames that is equivalent to the enumeration of nodenames intended to be
-denoted by Slurm tooling that created the nodeset expression.
+Though not the only use case, by far the most important use case, from my perspective,
+for any tooling delivered by this project, is the handling of nodeset expressions that
+are produced by the utilties of the Slurm workload manager system [^SLURM]. Design
+considerations in this project are guided or restricted by the requirement that the
+nodeset expressions produced by Slurm tools must be recognized as valid language in
+terms of the language(s) and tooling described here, on the prerequisite that the Slurm
+instance has all of its nodenames configured in a way that is compliant with the
+requirements for hostnames of the Domain Name System (DNS) [^DNS]. Apart from being
+recognized as valid, the language(s) and tooling of this project must also attribute
+the same meaning to the nodeset expressions output by Slurm tools - that is: they
+must expand to an enumeration of literal nodenames that is equivalent to the enumeration
+of nodenames intended to be denoted by the Slurm tooling that created the nodeset
+expression.
 
 # A nodeset expression language has an alphabet and a grammar
 A nodeset expression _language_ is simply the language in which nodeset expressions
