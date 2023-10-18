@@ -1,11 +1,12 @@
 # nodesetexpr-expand
 
 ## What this project is about
-Nodeset expressions are character strings over a well-defined alphabet of character
-literals that constitute a (potentially) concise way to denote a potentially large
-but finite _set_ of nodenames. Nodenames in this context are names of computer
-systems, such as the nodes of a cluster of compute nodes for high performance
-computing and/or capacity computing.
+Nodeset expressions are strings, of a formal language defined over some
+well-defined alphabet of character literals, that constitute a (potentially)
+concise way to denote a potentially large but finite _set_ of nodenames.
+
+Nodenames in this context are names of computer systems, such as the nodes of a
+cluster of compute nodes for high performance computing and/or capacity computing.
 
 The focus of this project is on (a) language(s) for nodeset expressions and on
 developing and maintaining (a) tool(s) for producing, from such expressions, the
