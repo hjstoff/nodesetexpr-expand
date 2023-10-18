@@ -31,8 +31,8 @@ by the requirement that the nodeset expressions produced by Slurm tools must all
 be recognized as valid language, and furthermore, that they have the same
 meaning - expand to the same enumeration of literal nodenames - as intended to
 be denoted by the Slurm tooling, provided the Slurm instance that has all of
-its nodenames configured in a way that is fully compliant with the requirements for
-hostnames for the Domain Name System (DNS).
+its nodenames configured in a way that is compliant with the requirements for
+hostnames for the Domain Name System (DNS) [^DNS].
 
 # A nodeset expression language has an alphabet and a grammar
 A nodeset expression _language_ is simply the language in which nodeset expressions
@@ -200,6 +200,18 @@ have not, for reasons pointed out in the language specification document.
 
 [^SLURM]: SchedMD, Slurm workload manager documentation,
 https://slurm.schedmd.com/documentation.html (last visited: 20231014).
+
+
+
+[^RFC1034]: Mockapetris, P., "Domain Names - Concepts and Facilities", STD 13,
+RFC 1034, November 1987.
+https://www.rfc-editor.org/rfc/rfc1034.txt (last visited: 20231014)
+
+[^RFC4343]: Eastlake, D. "Domain Name System (DNS) Case Insensitivity
+Clarification", RFC 4343, January 2006.
+https://www.rfc-editor.org/rfc/rfc4343.txt (last visited: 202310140
+
+
 
 [^SINFO]: SchedMD, Slurm workload manager, version 23.02 manual page,
 "sinfo - view information about Slurm nodes and partitions",
