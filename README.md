@@ -214,10 +214,15 @@ https://slurm.schedmd.com/documentation.html (last visited: 20231014).
 [^DNS]: There are several relevant so-called "Request for Comment" documents
 (RFCs). The oldest one is probably RFC 952 [^RFC952]. Other relevant RFCs are
 RFC 1034 [^RFC1034], RFC 1123 [^RFC1123], RFC 1178 [^RFC1178], and RFC 4343
-[^RFC4343]. There are some small changes over time, not so much with respect
-to the characters that can be used, but more to restriction on which characters
-can be the first character of a hostname. 
+[^RFC4343]. Some of these documents may appear to be "ancient", but in fact
+they show that there indeed some changes over time, but very limited ones,
+not so much with respect to the characters that can be used in a hostname,
+but more to restriction on which characters can be the first character of a
+hostname.
 
+[^RFC952]: Harrenstein, K. et al., "DOD INTERNET HOST TABLE SPECIFICATION",
+RFC 952, October 1985.
+https://www.rfc-editor.org/rfc/rfc952.txt (last visited: 20231014)
 
 [^RFC1034]: Mockapetris, P., "Domain Names - Concepts and Facilities", STD 13,
 RFC 1034, November 1987.
@@ -231,7 +236,7 @@ https://www.rfc-editor.org/rfc/rfc1123.txt (last visited: 20231014)
 RFC 1178, August 1990.
 https://www.rfc-editor.org/rfc/rfc1178.txt (last visited: 20231014)
 
-[^RFC4343]: Eastlake, D. "Domain Name System (DNS) Case Insensitivity
+[^RFC4343]: Eastlake, D., "Domain Name System (DNS) Case Insensitivity
 Clarification", RFC 4343, January 2006.
 https://www.rfc-editor.org/rfc/rfc4343.txt (last visited: 202310140
  
