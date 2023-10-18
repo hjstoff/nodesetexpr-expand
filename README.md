@@ -1,21 +1,31 @@
 # nodesetexpr-expand
 
 ## Demarcation of nodeset expressions and nodeset expression languages
-Nodeset expressions are character strings over an well-defined alphabet of character
-literals that constitute a (potentially) - concise way to denote ac potentially large
-but finite, _set_ of nodenames.
+Nodeset expressions are character strings over a well-defined alphabet of character
+literals that constitute a (potentially) concise way to denote a potentially large
+but finite _set_ of nodenames.
+
+The focus of this project is on (a) language(s) for nodeset expressions and on
+developing and maintaining (a) tool(s) for producing, from such expressions, the
+explicit enumeration of all set members. More specifically, nodeset expression
+_expanding_ pertains to the parsing of nodeset expressions, and to the subsequent
+production of each of the node names denoted by an expression, as a set of distinct
+individual character strings - one for each set member - to be stored in some
+appropriate "container type" that, at least during production, guartantees uniqueness
+of each element.
 
 A nodeset expression _language_ is simply the language in which nodeset expressions
 are formulated. But a nodeset expression language is a _formal_ language: it has
-- an alphabet, a finite set of literal characters
-- a well-defined syntax, or grammar, that is: a set of rules that defines how
-  sequences of characters that are part of the alphabet can be combined into sequences
-  that are valid language constructs.
+- a well-defined alphabet, i.e: a finite set of literal characters that can be used by
+  expressions that belong to the language
+- a well-defined syntax, or grammar, i.e: a set of rules that defines how sequences of
+  characters that are part of the alphabet can be combined to form valid language
+  constructs.
 
 Character strings that contain a character that does not belong to the alphabet of
 a language _L_ by definition are not part of the language, and neither is any
 sequence of alphabetical characters of _L_ that cannot possibly be produced by following
-the syntax rules of _L_.
+the syntax rules of _L_ a part of that language.
 
 If the nodeset expression language is to have any practical purpose, most, and preferably
 all of the language constructs that can be produced by it, also have a well-defined
