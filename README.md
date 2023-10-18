@@ -1,8 +1,8 @@
 # nodesetexpr-expand
 
 ## What this project is about
-Nodeset expressions are strings, in a formal language, defined over some
-finite alphabet of character literals, that constitute a (potentially)
+Nodeset expressions are strings, in a formal language that is defined over
+some finite alphabet of character literals, that constitute a (potentially)
 concise way to denote a potentially large but finite _set_ of nodenames.
 
 Nodenames in this context are names of computer systems, such as the nodes of
@@ -41,6 +41,7 @@ must expand to an enumeration of literal nodenames that is equivalent to the enu
 of nodenames intended to be denoted by the Slurm tooling that created the nodeset
 expression.
 
+
 ## Defining ingredients of a nodeset expression language: alphabet and grammar
 A nodeset expression _language_ is simply the language in which nodeset expressions
 are formulated.
@@ -73,14 +74,17 @@ and grammar, must be closely related to the language for expressing nodenames, b
 is definitely not the same language.
 
 One form - perhaps the most basic and explicit form - of a nodeset expression, that
-a nodeset expression language should support, is a sequence of one or more literal
+a nodeset expression language must support, is a sequence of one or more literal
 nodenames, where the individual nodenames are separated from each other by a
 well-defined token that cannot be part of any nodename.
-Nodeset expressions denote _sets_. For the semantics of the this basic form purpose
-implies, or requires, that multiple occurrences of the same name in the sequence are
-valid perfectly valid, but are _idempotent_.
 
-I
+Nodeset expressions must denote _sets_. For the semantics of the this basic form, we
+allow that multiple occurrences of the same name in the sequence perfectly valid, but
+that they are _idempotent_. The semantics, that the expression denotes a set while
+at the same multiple instances of the same string are tolerated in this basic list form,
+require that the occurence of such redundant instances makes no difference for the
+outcome of the expansion operation.
+
 
 This however, is obviously not the most concise form. Nodeset expressions
 get their conciseness, and thereby their usefulness, from also using language
