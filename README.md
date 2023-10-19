@@ -88,15 +88,17 @@ at the same multiple instances of the same string are tolerated in this basic li
 require that the occurence of such redundant instances makes no difference for the
 outcome of the expansion operation.
 
-We could also reason about this as follows, if we say that the comma is a set union operator.
-The union of ay set with itself just renders the same set. So, if "node1" is a nodeset
-expression denoting a set with a single nodename, then a nodeset expression applying the
-union operation multiple times, like so: "node1,node1,node1,node1", or like so: "node1,node1",
-should be accepted as valid expressions that both result in the same thing, viz. a set, that
-when expanded just produces a single nodename. Note that, if the language of nodenames is to
-follow DNS rules, which require case insensitive treatment of names, then also a nodeset
-expression like the following should expand to just a single name:
-"node1,NODE1,noDE1,Node1,nODE1,NoDe1". 
+If we say that the comma is a set union operator, we can also reason about this as follows:
+- The union of ay set with itself just renders the same set.
+- So, if "node1" is a nodeset expression denoting a set with a single nodename, then a
+  nodeset expression applying the union operation multiple times, like so: "node1,node1,node1,node1",
+  or like so: "node1,node1", should be accepted as valid expression.
+- both examples result in the same thing, viz. a set, that when expanded just produces the
+  same single nodename.
+
+Note that, if the language of nodenames is to follow DNS rules, which require case
+insensitive treatment of names, then also a nodeset expression like the following should
+expand to just a single name: "node1,NODE1,noDE1,Node1,nODE1,NoDe1". 
 
 While to be treated as valid, the union of a whole series of literal nodenames obviously
 is not the most concise form of nodeset expressions. Nodeset expressions get their
