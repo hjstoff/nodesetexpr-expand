@@ -10,15 +10,14 @@ involved have been named systematically following some numbering scheme -
 something like: "_node1_", "_node2_", ..., or: "_xtype_node001_", "_xtype_node002_",
 ..., "_ytype_node001_", "_ytype_node002_", ...
 
-This project tries define nodesets in terms of a formal language that is defined
-over some finite alphabet of character literals. Its focus of is on (a)
-language(s) for nodeset expressions and on developing and maintaining tooling for
-producing, from such expressions, the explicit enumeration of all set members.
-More specifically, nodeset expression _expanding_ pertains to the parsing of nodeset
-expressions, and to the subsequent production of each of the nodenames denoted by
-such expressions, as sets of individual character strings - viz. a unique distinct
-one for each set member - to be stored in some appropriate "container type" that, at
-least during production, guartantees the uniqueness of each of its elements.
+This project focusses on acurately describing (a) language(s) for nodeset expressions
+and on developing and maintaining tooling for producing from nodeset expressions,
+the explicit enumeration of all set members. More specifically, nodeset expression
+_expanding_ pertains to the parsing of nodeset expressions, and to the subsequent
+production of each of the nodenames denoted by such expressions, as sets of individual
+character strings - viz. a unique distinct one for each set member - to be stored in
+some appropriate "container type" that, at least during production, guartantees the
+uniqueness of each of its elements.
 
 ## Scope limitations and use case derived design guidance
 The inverse operation of nodeset expression expanding is _compressing_, or
@@ -227,6 +226,10 @@ have not, for reasons pointed out in the language specification document.
 
 [^SLURM]: SchedMD, Slurm workload manager documentation,
 https://slurm.schedmd.com/documentation.html (last visited: 20231014).
+
+[^SLURMCONF]: SchedMD, Slurm workload manager documentation, version 22.02
+manual page, "slurm.conf - Slurm configuration file"
+https://slurm.schedmd.com/slurm.conf.html (last visited: 20231014).
 
 [^DNS]: There are several relevant so-called "Request for Comment" documents
 (RFCs). The oldest one is probably RFC 952 [^RFC952]. Other relevant RFCs are
