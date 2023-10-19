@@ -34,12 +34,14 @@ considerations in this project are guided or restricted by the requirement that 
 nodeset expressions produced by Slurm tools must be recognized as valid language in
 terms of the language(s) and tooling described here, on the prerequisite that the Slurm
 instance has all of its nodenames configured in a way that is compliant with the
-requirements for hostnames of the Domain Name System (DNS) [^DNS]. Apart from being
-recognized as valid, the language(s) and tooling of this project must also attribute
-the same meaning to the nodeset expressions output by Slurm tools - that is: they
-must expand to an enumeration of literal nodenames that is equivalent to the enumeration
-of nodenames intended to be denoted by the Slurm tooling that created the nodeset
-expression.
+requirements for hostnames of the Domain Name System (DNS) [^DNS], or the first
+label [^DNSLABEL] of such names.
+
+Apart from being recognized as valid, the language(s) and tooling of this project must
+also attributethe same meaning to the nodeset expressions output by Slurm tools - that
+is: they must expand to an enumeration of literal nodenames that is equivalent to the
+enumeration of nodenames intended to be denoted by the Slurm tooling that created the
+nodeset expression.
 
 
 ## Defining ingredients of a nodeset expression language: alphabet and grammar
@@ -217,12 +219,15 @@ https://slurm.schedmd.com/documentation.html (last visited: 20231014).
 
 [^DNS]: There are several relevant so-called "Request for Comment" documents
 (RFCs). The oldest one is probably RFC 952 [^RFC952]. Other relevant RFCs are
-RFC 1034 [^RFC1034], RFC 1123 [^RFC1123], RFC 1178 [^RFC1178], and RFC 4343
-[^RFC4343]. Some of these documents may appear to be "ancient", but in fact
-they show that there indeed some changes over time, but very limited ones,
-not so much with respect to the characters that can be used in a hostname,
-but more to restriction on which characters can be the first character of a
-hostname.
+RFC 1034 [^RFC1034], RFC 1123 [^RFC1123], and RFC 4343 [^RFC4343]. Some of
+these documents may appear to be "ancient", but in fact they show that there
+indeed some changes over time, but very limited ones, not so much with respect
+to the characters that can be used in a hostname, but more to restriction on
+which characters can be the first character of a hostname.
+
+[^DNSLABEL]: Fully qualified domain names consist of several labels connected
+by periods ("."). The first label only, without a domain suffix, sometimes also
+refered to as the "short hostname", is perfectly accecptable as as nodename.
 
 [^RFC952]: Harrenstein, K. et al., "DOD INTERNET HOST TABLE SPECIFICATION",
 RFC 952, October 1985.
@@ -236,14 +241,9 @@ https://www.rfc-editor.org/rfc/rfc1034.txt (last visited: 20231014)
 RFC 1123, October 1989.
 https://www.rfc-editor.org/rfc/rfc1123.txt (last visited: 20231014)
 
-[^RFC1178]: Libes, D., "Choosing a Name for Your Computer",
-RFC 1178, August 1990.
-https://www.rfc-editor.org/rfc/rfc1178.txt (last visited: 20231014)
-
 [^RFC4343]: Eastlake, D., "Domain Name System (DNS) Case Insensitivity
 Clarification", RFC 4343, January 2006.
 https://www.rfc-editor.org/rfc/rfc4343.txt (last visited: 202310140
- 
 
 [^SINFO]: SchedMD, Slurm workload manager, version 23.02 manual page,
 "sinfo - view information about Slurm nodes and partitions",
