@@ -225,9 +225,11 @@ indeed some changes over time, but very limited ones, not so much with respect
 to the characters that can be used in a hostname, but more to restriction on
 which characters can be the first character of a hostname.
 
-[^DNSLABEL]: Fully qualified domain names consist of several labels connected
-by periods ("."). The first label only, without a domain suffix, sometimes also
-refered to as the "short hostname", is perfectly accecptable as as nodename.
+[^DNSLABEL]: Fully qualified domain names (FQDNs0 consist of several labels connected
+by periods ("."). What is sometimes refered to as a "short hostname" is perfectly
+acceptable as a nodename. A short hostname is the first label of an FQDN only, and
+according to the SLURM documentation preferred over an FQDN as a nodename in defined
+in the central Slurm configuration file [^SLURMCONF].
 
 [^RFC952]: Harrenstein, K. et al., "DOD INTERNET HOST TABLE SPECIFICATION",
 RFC 952, October 1985.
