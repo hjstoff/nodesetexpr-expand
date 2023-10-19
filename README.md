@@ -7,8 +7,8 @@ Nodenames in this context are names of computer systems, such as the nodes of
 a cluster of compute nodes for high performance computing and/or capacity
 computing. The potential conciseness of the expressions requires that the nodes
 involved have been named systematically following some numbering scheme -
-something like: "node1", "node2", ..., or: "xtype_node001", "xtype_node002", ...,
-"ytype_node001", "ytype_node002", ...
+something like: "_node1_", "_node2_", ..., or: "_xtype_node001_", "_xtype_node002_",
+..., "_ytype_node001_", "_ytype_node002_", ...
 
 This project tries define nodesets in terms of a formal language that is defined
 over some finite alphabet of character literals. Its focus of is on (a)
@@ -99,12 +99,12 @@ follow DNS rules, which require case insensitive treatment of names, then also a
 expression like the following should expand to just a single name:
 "node1,NODE1,noDE1,Node1,nODE1,NoDe1". 
 
-While to be treated as valid, the union of a whole series of literal nodenames, while valid is
-obviously not the most concise form of nodeset expressions. Nodeset expressions get their
-conciseness, and thereby their usefulness, from also using language constructs that presuppose that the nodenames to be denoted were created by
-systematically applying some numbering scheme. The most obvious language construct
-that results in conciseness, is one that enables the expression of numeric ranges,
-used in naming nodes, by merely naming their bounds.
+While to be treated as valid, the union of a whole series of literal nodenames obviously
+is not the most concise form of nodeset expressions. Nodeset expressions get their
+conciseness, and thereby their usefulness, from also using language constructs that presuppose
+that the nodenames to be denoted were created by systematically applying some numbering scheme.
+The most obvious language construct that results in conciseness, is one that enables the
+expression of numeric ranges, that in naming nodes, by merely naming their bounds.
 
 Nodeset expression expanding pertains to the parsing of such expressions, and to
 the subsequent production of the of each of the node names denoted by the expression,
