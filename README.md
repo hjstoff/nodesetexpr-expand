@@ -1,22 +1,24 @@
 # nodesetexpr-expand
 
 ## What this project is about
-Nodeset expressions are strings, in a formal language that is defined over
-some finite alphabet of character literals, that constitute a (potentially)
+Nodeset expressions are character strings that constitute a (potentially)
 concise way to denote a potentially large but finite _set_ of nodenames.
-
 Nodenames in this context are names of computer systems, such as the nodes of
 a cluster of compute nodes for high performance computing and/or capacity
-computing.
+computing. The potential conciseness of the expressions requires that the nodes
+involved have been named systematically following some numbering scheme -
+something like: "node1", "node2", ..., or: "xtype_node001", "xtype_node002", ...,
+"ytype_node001", "ytype_node002", ...
 
-The focus of this project is on (a) language(s) for nodeset expressions and on
-developing and maintaining tooling for producing, from such expressions, the
-explicit enumeration of all set members. More specifically, nodeset expression
-_expanding_ pertains to the parsing of nodeset expressions, and to the subsequent
-production of each of the nodenames denoted by such expressions, as sets of
-individual character strings - viz. a unique distinct one  for each set member -
-to be stored in some appropriate "container type" that, at least during production,
-guartantees the uniqueness of each of its elements.
+This project tries define nodesets in terms of a formal language that is defined
+over some finite alphabet of character literals. Its focus of is on (a)
+language(s) for nodeset expressions and on developing and maintaining tooling for
+producing, from such expressions, the explicit enumeration of all set members.
+More specifically, nodeset expression _expanding_ pertains to the parsing of nodeset
+expressions, and to the subsequent production of each of the nodenames denoted by
+such expressions, as sets of individual character strings - viz. a unique distinct
+one for each set member - to be stored in some appropriate "container type" that, at
+least during production, guartantees the uniqueness of each of its elements.
 
 ## Scope limitations and use case derived design guidance
 The inverse operation of nodeset expression expanding is _compressing_, or
@@ -38,11 +40,10 @@ requirements for hostnames of the Domain Name System (DNS) [^DNS], or the first
 label [^DNSLABEL] of such names.
 
 Apart from being recognized as valid, the language(s) and tooling of this project must
-also attributethe same meaning to the nodeset expressions output by Slurm tools - that
+also attribute the same meaning to the nodeset expressions output by Slurm tools - that
 is: they must expand to an enumeration of literal nodenames that is equivalent to the
 enumeration of nodenames intended to be denoted by the Slurm tooling that created the
 nodeset expression.
-
 
 ## Defining ingredients of a nodeset expression language: alphabet and grammar
 A nodeset expression _language_ is simply the language in which nodeset expressions
@@ -77,8 +78,9 @@ is definitely not the same language.
 
 One form - perhaps the most basic and explicit form - of a nodeset expression, that
 a nodeset expression language must support, is a sequence of one or more literal
-nodenames, where the individual nodenames are separated from each other by a
-well-defined token that cannot be part of any nodename.
+nodenames, where the individual nodenames are separated from each other by a token
+that cannot be part of any nodename. Since we require compatibility with Slurm's nodeset
+expression, that token is the comma (",").
 
 Nodeset expressions must denote _sets_. For the semantics of the this basic form, we
 allow that multiple occurrences of the same name in the sequence perfectly valid, but
@@ -87,10 +89,19 @@ at the same multiple instances of the same string are tolerated in this basic li
 require that the occurence of such redundant instances makes no difference for the
 outcome of the expansion operation.
 
+We could also reason about this as follows, if we say that the comma is a set union operator.
+The union of ay set with itself just renders the same set. So, if "node1" is a nodeset
+expression denoting a set with a single nodename, then a nodeset expression applying the
+union operation multiple times, like so: "node1,node1,node1,node1", or like so: "node1,node1",
+should be accepted as valid expressions that both result in the same thing, viz. a set, that
+when expanded just produces a single nodename. Note that, if the language of nodenames is to
+follow DNS rules, which require case insensitive treatment of names, then also a nodeset
+expression like the following should expand to just a single name:
+"node1,NODE1,noDE1,Node1,nODE1,NoDe1". 
 
-This however, is obviously not the most concise form. Nodeset expressions
-get their conciseness, and thereby their usefulness, from also using language
-constructs that presuppose that the nodenames to be denoted were created by
+While to be treated as valid, the union of a whole series of literal nodenames, while valid is
+obviously not the most concise form of nodeset expressions. Nodeset expressions get their
+conciseness, and thereby their usefulness, from also using language constructs that presuppose that the nodenames to be denoted were created by
 systematically applying some numbering scheme. The most obvious language construct
 that results in conciseness, is one that enables the expression of numeric ranges,
 used in naming nodes, by merely naming their bounds.
