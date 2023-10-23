@@ -13,7 +13,7 @@ or: "_xtype_node001_", "_xtype_node002_", ..., "_ytype_node001_", "_ytype_node00
 This project focusses on:
 - accurately describing (a) language(s) for nodeset expressions;
 - developing and maintaining tooling for producing from nodeset expressions,
-  the explicit enumeration of all set members.
+  the explicit enumeration of all set members denoted by such expressions.
 
 More specifically, nodeset expression _expanding_ pertains to the parsing of nodeset
 expressions, and to the subsequent production of each of the nodenames denoted by
@@ -82,8 +82,10 @@ grammar and tested by regular expression based tests alone:
   specified by regular (sub-)expressions that deal with the repetition of character
   literals only, it is not feasible to do so, with - in a regular expression
   parenthesised - repetitions of such (sub-)strings. For compliancy with DNS, the norm
-  that a single "label" must be limited to a maximum of 63 characters is doable. The overall
-  length limit of 253 characters for a fully qualified domain name is not.
+  that a single "label" must be limited to a maximum of 63 characters is doable to specify
+  by means of a regular expression only. The overall length limit, of 253 characters for a
+  fully qualified domain name (FQDN) is not, because both the number of labels and the
+  length of each label can vary.
         
 ### Nodeset expression language semantics
 If the nodeset expression language is to have any practical purpose, it has to be
