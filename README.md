@@ -7,28 +7,30 @@ Nodenames in this context are names of computer systems, such as the nodes of
 a cluster of compute nodes for high performance computing and/or capacity
 computing. The potential conciseness of the expressions requires that the nodes
 involved have been named systematically following some numbering scheme -
-something like: "_node1_", "_node2_", ..., or: "_xtype_node001_", "_xtype_node002_",
-..., "_ytype_node001_", "_ytype_node002_", ...
+something simple (but quite realistic) like: "_node1_", "_node2_", ...,
+or: "_xtype_node001_", "_xtype_node002_", ..., "_ytype_node001_", "_ytype_node002_", ...
 
-This project focusses on acurately describing (a) language(s) for nodeset expressions
-and on developing and maintaining tooling for producing from nodeset expressions,
-the explicit enumeration of all set members. More specifically, nodeset expression
-_expanding_ pertains to the parsing of nodeset expressions, and to the subsequent
-production of each of the nodenames denoted by such expressions, as sets of individual
-character strings - viz. a unique distinct one for each set member - to be stored in
-some appropriate "container type" that, at least during production, guartantees the
-uniqueness of each of its elements.
+This project focusses on:
+- accurately describing (a) language(s) for nodeset expressions;
+- developing and maintaining tooling for producing from nodeset expressions,
+  the explicit enumeration of all set members.
+
+More specifically, nodeset expression _expanding_ pertains to the parsing of nodeset
+expressions, and to the subsequent production of each of the nodenames denoted by
+such expressions, as sets of individual character strings - viz. a unique distinct
+one for each set member - to be stored in some appropriate "container type" that,
+at least during production, guartantees the uniqueness of each of its elements.
 
 ## Scope limitations and use case derived design guidance
 The inverse operation of nodeset expression expanding is _compressing_, or
 _folding_ a list of nodenames into a nodeset expression. Such inverse operations
-are not in scope of this project. In particular, whether optimised compressing,
+are _not_ in scope of this project. In particular, whether optimised compressing,
 finding the most succint nodeset expression, would be easier or more difficult
-to implement, in this project is not having any bearing on the outcome of
-decisions pertaining to the nodeset expression language's syntax or its semantics.
+to implement, is not having any bearing on the outcome of decisions in this
+project pertaining to the nodeset expression language's syntax or its semantics.
 
 Nodeset expressions, and tools that produce them, already exist for quite some time.
-Though not the only use case, by far the most important use case, from my perspective,
+Though not the only use case, by far the _most important_ use case, from my perspective,
 for any tooling delivered by this project, is the handling of nodeset expressions that
 are produced by the utilties of the Slurm workload manager system [^SLURM]. Design
 considerations in this project are guided or restricted by the requirement that the
@@ -39,7 +41,7 @@ requirements for hostnames of the Domain Name System (DNS) [^DNS], or the first
 label [^DNSLABEL] of such names.
 
 Apart from being recognized as valid, the language(s) and tooling of this project must
-also attribute the same meaning to the nodeset expressions output by Slurm tools - that
+also _attribute the same meaning to the nodeset expressions output by Slurm tools_ - that
 is: they must expand to an enumeration of literal nodenames that is equivalent to the
 enumeration of nodenames intended to be denoted by the Slurm tooling that created the
 nodeset expression.
@@ -73,13 +75,18 @@ syntax, even for formal languages.
 
 Since a nodeset expression languages is for denoting sets of nodenames, its alphabet
 and grammar, must be closely related to the language for expressing nodenames, but it
-is definitely not the same language.
+is definitely not the same language. Besides valid node name characters, the alphabet
+of a nodeset epxression language must contain at least some additional characters that
+denote some operation for construction of a set of nodenames. Below tsuch characters
+will sometimes be referred to as "meta-characters" to explcitly distinguish them from
+nodename literals.
 
+### (One) meaning of the comma in nodeset expressions
 One form - perhaps the most basic and explicit form - of a nodeset expression, that
 a nodeset expression language must support, is a sequence of one or more literal
 nodenames, where the individual nodenames are separated from each other by a token
-that cannot be part of any nodename. Since we require compatibility with Slurm's nodeset
-expression, that token is the comma (",").
+that cannot be part of any nodename, a meta-character. Since we require compatibility
+with Slurm's nodeset expression, that meta-character is the comma (",").
 
 Nodeset expressions must denote _sets_. For the semantics of the this basic form, we
 allow that multiple occurrences of the same name in the sequence perfectly valid, but
@@ -88,37 +95,30 @@ at the same multiple instances of the same string are tolerated in this basic li
 require that the occurence of such redundant instances makes no difference for the
 outcome of the expansion operation.
 
-If we say that the comma is a set union operator, we can also reason about this as follows:
+If we say that the comma is a set union operator, we can also reason about this
+as follows:
 - The union of ay set with itself just renders the same set.
 - So, if "node1" is a nodeset expression denoting a set with a single nodename, then a
-  nodeset expression applying the union operation multiple times, like so: "node1,node1,node1,node1",
-  or like so: "node1,node1", should be accepted as valid expression.
-- both examples result in the same thing, viz. a set, that when expanded just produces the
-  same single nodename.
+  nodeset expression applying the union operation multiple times - like so:
+  "node1,node1,node1,node1", or like so: "node1,node1" - should be accepted as valid
+  nodeset expression.
+- both examples result in the same thing, viz. a set, that when expanded just produces
+  the same single nodename.
 
 Note that, if the language of nodenames is to follow DNS rules, which require case
 insensitive treatment of names, then also a nodeset expression like the following should
 expand to just a single name: "node1,NODE1,noDE1,Node1,nODE1,NoDe1". 
 
+### More operations and meta-characters to denote them
 While to be treated as valid, the union of a whole series of literal nodenames obviously
 is not the most concise form of nodeset expressions. Nodeset expressions get their
-conciseness, and thereby their usefulness, from also using language constructs that presuppose
-that the nodenames to be denoted were created by systematically applying some numbering scheme.
-The most obvious language construct that results in conciseness, is one that enables the
-expression of numeric ranges, that in naming nodes, by merely naming their bounds.
+conciseness, and thereby their usefulness, from also using language constructs that
+presuppose that the nodenames to be denoted were created by systematically applying some
+numbering scheme. The most obvious language construct that results in conciseness,
+is one that enables the expression of numeric ranges, that in naming nodes, by merely
+naming their bounds.
 
-Nodeset expression expanding pertains to the parsing of such expressions, and to
-the subsequent production of the of each of the node names denoted by the expression,
-as a set of distinct individual character strings, to be stored in some appropriate
-"container type" that, at least during production, guartantees, deduplicates of
-multiple additions of the same string, so as to preserve the concept that the
-nodeset expression that was expanded denoted a _set_, rather than a list,
-of names.
-
-The focus of this project is on (a) language(s) for nodeset expressions and on
-developing and maintaining (a) tool(s) for expanding such expressions into the
-explicit enumeration of all set members.
-
+( ... ) 
 
 Nodeset expressions occur in line records output by commands of the Slurm
 [^SLURM] workload manager system, like ```sinfo``` [^SINFO] or ```sacct```
