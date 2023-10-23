@@ -32,13 +32,14 @@ project pertaining to the nodeset expression language's syntax or its semantics.
 Nodeset expressions, and tools that produce them, already exist for quite some time.
 Though not the only use case, by far the _most important_ use case, from my perspective,
 for any tooling delivered by this project, is the handling of nodeset expressions that
-are produced by the utilties of the Slurm workload manager system [^SLURM]. Design
-considerations in this project are guided or restricted by the requirement that the
-nodeset expressions produced by Slurm tools must be recognized as valid language in
-terms of the language(s) and tooling described here, on the prerequisite that the Slurm
+are produced by the utilties of the Slurm workload manager system [^SLURM].
+
+Design considerations in this project are guided or restricted by the requirement that
+the nodeset expressions produced by Slurm tools must be recognized as valid language in
+terms of the language(s) and tooling described here, **_on the prerequisite that the Slurm
 instance has all of its nodenames configured in a way that is compliant with the
 requirements for hostnames of the Domain Name System (DNS) [^DNS], or the first
-label [^DNSLABEL] of such names.
+label [^DNSLABEL] of such names_**.
 
 Apart from being recognized as valid, the language(s) and tooling of this project must
 also _attribute the same meaning to the nodeset expressions output by Slurm tools_ - that
@@ -47,6 +48,8 @@ enumeration of nodenames intended to be denoted by the Slurm tooling that create
 nodeset expression.
 
 ## Defining ingredients of a nodeset expression language: alphabet and grammar
+
+### Nodeset expression language grammar
 A nodeset expression _language_ is simply the language in which nodeset expressions
 are formulated.
 
@@ -65,7 +68,24 @@ It also implies that a sequence of alphabetical characters of _L_, that cannot p
 be produced by following the syntax rules of _L_, are not part of the language, and hence
 are not nodeset expressions at all.
 
-## Nodeset expression language semantics
+The nodeset expresion language cannot be but closely related to the language of nodenames.
+If, as indicated above, the DNS requirements for valid hostnames are to be taken as a norm
+for valid nodenames, the language of nodenames is best characterized as a regular language.
+However, some of the DNS requirements for hostnames cannot be tested by means of a regular
+grammar and tested by regular expression based tests alone:
+
+- A grammar may specify that both sequences of uppercase and lowercase characters of the
+  alphabet are valid, but by itself it cannot specify that 'A' is to be treated as
+  the equivalent of 'a', 'B' as the equivalent of 'b', and so on. This is a semantic
+  requirement.
+- While the specification of length limits in terms of literal characterscan feasibly be
+  specified by regular (sub-)expressions that deal with the repetition of character
+  literals only, it is not feasible to do so, with - in a regular expression
+  parenthesised - repetitions of such (sub-)strings. For compliancy with DNS, the norm
+  that a single "label" must be limited to a maximum of 63 characters is doable. The overall
+  length limit of 253 characters for a fully qualified domain name is not.
+        
+### Nodeset expression language semantics
 If the nodeset expression language is to have any practical purpose, it has to be
 meaningful is some sense: most, and preferably all, of the language constructs that
 can be produced by appying its rules, also have a well-defined meaning. Unfortunately,
@@ -77,11 +97,11 @@ Since a nodeset expression languages is for denoting sets of nodenames, its alph
 and grammar, must be closely related to the language for expressing nodenames, but it
 is definitely not the same language. Besides valid node name characters, the alphabet
 of a nodeset epxression language must contain at least some additional characters that
-denote some operation for construction of a set of nodenames. Below tsuch characters
-will sometimes be referred to as "meta-characters" to explcitly distinguish them from
+denote some operation for construction of a set of nodenames. Below, such characters
+will sometimes be referred to as "meta-characters" to explicitly distinguish them from
 nodename literals.
 
-### (One) meaning of the comma in nodeset expressions
+#### (One) meaning of the comma in nodeset expressions
 One form - perhaps the most basic and explicit form - of a nodeset expression, that
 a nodeset expression language must support, is a sequence of one or more literal
 nodenames, where the individual nodenames are separated from each other by a token
@@ -109,7 +129,7 @@ Note that, if the language of nodenames is to follow DNS rules, which require ca
 insensitive treatment of names, then also a nodeset expression like the following should
 expand to just a single name: "node1,NODE1,noDE1,Node1,nODE1,NoDe1". 
 
-### More operations and meta-characters to denote them
+#### More operations and meta-characters to denote them
 While to be treated as valid, the union of a whole series of literal nodenames obviously
 is not the most concise form of nodeset expressions. Nodeset expressions get their
 conciseness, and thereby their usefulness, from also using language constructs that
