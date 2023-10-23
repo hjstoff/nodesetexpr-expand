@@ -84,8 +84,8 @@ grammar and tested by regular expression based tests alone:
   literals only, it is not feasible to do so, with - in a regular expression
   parenthesised - repetitions of such (sub-)strings. The DNS norm that a single "label" of
   a nodename must be limited to a maximum of 63 characters is doable to specify by means
-  of a regular expression only. For the DNS norm that the overall length limit, of 253
-  characters for a fully qualified domain name (FQDN) this is not the case, because both
+  of a regular expression only. For the DNS norm, that the overall length limit for a
+  fully qualified domain name (FQDN) is 253 characters, this is not the case, because both
   the number of labels and the length of each label can vary.
 
 See ```hostname-regex.gawk```, this project's repository, for validation functions using
