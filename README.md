@@ -68,7 +68,7 @@ It also implies that a sequence of alphabetical characters of _L_, that cannot p
 be produced by following the syntax rules of _L_, are not part of the language, and hence
 are not nodeset expressions at all.
 
-#### relation to the grammar of nodename language  
+#### Relation to the grammar of nodename language  
 The nodeset expresion language cannot be but closely related to the language of nodenames.
 If, as indicated above, the DNS requirements for valid hostnames are to be taken as a norm
 for valid nodenames, the language of nodenames is best characterized as a regular language.
@@ -131,7 +131,7 @@ outcome of the expansion operation.
 
 If we say that the comma is a set union operator, we can also reason about this
 as follows:
-- The union of ay set with itself just renders the same set.
+- The union of any set with itself just renders the same set.
 - So, if "node1" is a nodeset expression denoting a set with a single nodename, then a
   nodeset expression applying the union operation multiple times - like so:
   "node1,node1,node1,node1", or like so: "node1,node1" - should be accepted as valid
