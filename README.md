@@ -68,6 +68,7 @@ It also implies that a sequence of alphabetical characters of _L_, that cannot p
 be produced by following the syntax rules of _L_, are not part of the language, and hence
 are not nodeset expressions at all.
 
+#### relation to the grammar of nodename language  
 The nodeset expresion language cannot be but closely related to the language of nodenames.
 If, as indicated above, the DNS requirements for valid hostnames are to be taken as a norm
 for valid nodenames, the language of nodenames is best characterized as a regular language.
@@ -81,11 +82,22 @@ grammar and tested by regular expression based tests alone:
 - While the specification of length limits in terms of literal characterscan feasibly be
   specified by regular (sub-)expressions that deal with the repetition of character
   literals only, it is not feasible to do so, with - in a regular expression
-  parenthesised - repetitions of such (sub-)strings. For compliancy with DNS, the norm
-  that a single "label" must be limited to a maximum of 63 characters is doable to specify
-  by means of a regular expression only. The overall length limit, of 253 characters for a
-  fully qualified domain name (FQDN) is not, because both the number of labels and the
-  length of each label can vary.
+  parenthesised - repetitions of such (sub-)strings. The DNS norm that a single "label" of
+  a nodename must be limited to a maximum of 63 characters is doable to specify by means
+  of a regular expression only. For the DNS norm that the overall length limit, of 253
+  characters for a fully qualified domain name (FQDN) this is not the case, because both
+  the number of labels and the length of each label can vary.
+
+See ```hostname-regex.gawk```, this project's repository, for validation functions using
+a combination of regular expressions with simple length checks where regular expressions
+alone are not feasible.
+
+**N.B.:**   
+The fact that the related language of nodenames is in essence a regular language does not
+imply that the language of nodeset expressions is necessarily a regular language as well.
+This depends mainly on the number of operators to be implemented and, if there is more than
+one operator, whether or not the means to specify the scope of operators by grouping
+(e.g. using parentheses) is useful for such a language.
         
 ### Nodeset expression language semantics
 If the nodeset expression language is to have any practical purpose, it has to be
