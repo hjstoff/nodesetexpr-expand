@@ -1,6 +1,6 @@
 #! /usr/bin/gawk -bf
 
-function check_parentheses(regexstr,	n, i, last) {
+function check_parentheses(regexstr,	n, i, leftcount, rightcount, last) {
 #
 # Return 0 if no unbalanced parenthesis detected, otherwise return
 # the character position at which unbalance has been detected.
@@ -29,11 +29,28 @@ function check_parentheses(regexstr,	n, i, last) {
 	return 0;
 }
 
+function count_parentheses(regexprstr,		n, i) {
+	n = length(regexprstr);
+	leftcount = 0;
+	for (i = 1; i <= n; ++i) {
+		if (substr(regexprstr, i, 1) == "(") {
+			++leftcount;
+		}
+	}
+	return leftcount; 
+}
 
-function f(s, regexprstr, submatch,	i) {
-	if (match(s, regexpr, submatch)) {
-		for (i in submatch) {
-			print i, submatch[i]);
+function f(s, regexprstr, submatch,	i, n) {
+	if (match(s, regexprstr, submatch)) {
+		n = count_parentheses(regexprstr);
+		for (i = 0; i <= n; ++i) {
+			if (i in submatch) {
+				printf("submatch %2d, start %d, length %d: %s\n",
+					i,
+					submatch[i, "start"],
+					submatch[i, "length"],
+					submatch[i]);
+			}		
 		} 
 	}
 	else {
@@ -158,7 +175,11 @@ BEGIN {
 
 
 {
-	if ((pos = check_parentheses($1)i) != 0) {
-		printf("Unbalanced parentheses: %d\n"i, pos);
+	if ((pos = check_parentheses($1)) != 0) {
+		printf("Unbalanced parentheses: %d\n", pos);
+	}
+	else {
+		print "###";
+		 f($1, nodesetexpr);
 	}
 }
