@@ -79,7 +79,7 @@ grammar and tested by regular expression based tests alone:
   alphabet are valid, but by itself it cannot specify that 'A' is to be treated as
   the equivalent of 'a', 'B' as the equivalent of 'b', and so on. This is a semantic
   requirement.
-- While the specification of length limits in terms of literal characterscan feasibly be
+- While the specification of length limits in terms of literal characters can feasibly be
   specified by regular (sub-)expressions that deal with the repetition of character
   literals only, it is not feasible to do so, with - in a regular expression
   parenthesised - repetitions of such (sub-)strings. The DNS norm that a single "label" of
