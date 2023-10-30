@@ -19,7 +19,7 @@ More specifically, nodeset expression _expanding_ pertains to the parsing of nod
 expressions, and to the subsequent production of each of the nodenames denoted by
 such expressions, as sets of individual character strings - viz. a unique distinct
 one for each set member - to be stored in some appropriate "container type" that,
-at least during production, guartantees the uniqueness of each of its elements.
+at least during production, guarantees the uniqueness of each of its elements.
 
 ## Scope limitations and use case derived design guidance
 The inverse operation of nodeset expression expanding is _compressing_, or
