@@ -2,8 +2,11 @@
 
 function check_parentheses(regexstr,	n, i, leftcount, rightcount, last) {
 #
-# Return 0 if no unbalanced parenthesis detected, otherwise return
-# the character position at which unbalance has been detected.
+# Return 0 if no unbalanced parenthesis detected in regexstr, otherwise return
+# the character position at which unbalance has been detected in regexstr.
+# Limitation:
+# The function does not take the possibility of escaping of parentheses
+# into account.
 #
 	n = length(regexstr);
 	leftcount = rightcount = last = 0;
@@ -30,6 +33,15 @@ function check_parentheses(regexstr,	n, i, leftcount, rightcount, last) {
 }
 
 function count_parentheses(regexprstr,		n, i) {
+#
+# Return the number of (left) parentheses found in regexprstr.
+# If parentheses are balanced, this is equal to the number of 
+# parentheses pairs, and so to the number of submatches that can be
+# captured by the match function.
+# Limitation:
+# The function does not take the possibility of escaping of parentheses
+# into account.
+#
 	n = length(regexprstr);
 	leftcount = 0;
 	for (i = 1; i <= n; ++i) {
@@ -40,7 +52,17 @@ function count_parentheses(regexprstr,		n, i) {
 	return leftcount; 
 }
 
-function f(s, regexprstr, submatch,	i, n) {
+function show_submatches(s, regexprstr, submatch,	i, n) {
+#
+# Try to match s against regexprstr, using gawk's  built-in match function.
+# If submatch is not a local variable, but passed to the function,
+# it must be passed as an array or as a variable yet to be defined.
+# On return, any previous contents of submatch is destroyed and submatch
+# contains all submatches.
+# On no match, nothing is printed, and the function returns -1.
+# On match the number of submatches is returned, which can be 0, if the
+# regular expression defines no submatches.
+#
 	if (match(s, regexprstr, submatch)) {
 		n = count_parentheses(regexprstr);
 		for (i = 0; i <= n; ++i) {
@@ -52,9 +74,10 @@ function f(s, regexprstr, submatch,	i, n) {
 					submatch[i]);
 			}		
 		} 
+		return n;
 	}
 	else {
-		print "NO match!";
+		return -1;
 	}
 }
 
@@ -163,7 +186,11 @@ BEGIN {
 	# Note that the first namepattern and the "rest" that follow (may be
 	# none) both are in an extra pair of parentheses for easy capturing
 	# these 2 as submatches.
+	# The extra pair of parentheses around the first namepattern will be submatch 1.
+	# The extra pair of parentheses around the "rest" will be submatch
+	# 1 + number of parentheses paris in name pattern + 1.
 	#
+	print "### " 2 + count_parentheses(namepattern); 
 	nodesetexpr = "(" namepattern ")((," namepattern ")*)";
 	printf("%s: /^%s$/\n", "nodesetexpr", nodesetexpr);
 	if ((pos = check_parentheses(namepattern)) > 0) {
@@ -180,6 +207,6 @@ BEGIN {
 	}
 	else {
 		print "###";
-		 f($1, nodesetexpr);
+		show_submatches($1, nodesetexpr);
 	}
 }
